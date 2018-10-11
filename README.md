@@ -1,4 +1,5 @@
 Purpose.
+
 	This script is intended to automatically launch the Citrix Reciever when a launch.jsp file has been downloaded. 
 
 Installation Directions.
