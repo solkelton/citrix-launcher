@@ -1,25 +1,15 @@
 #!/bin/bash
 
 main() {
-	validate_fswatch=$(which fswatch 2>&1)
-	if [ "$validate_fswatch" = "fswatch not found" ]; then #remove '!' for testing only
-		fswatch_install_prompt
-		
-		while validate_installation 
-		do 
-			fswatch_install_prompt
-		done
+	fswatch_status=$(which fswatch 2>&1)
+	if [ "$fswatch_status" = "fswatch not found" ]; then
+		download_prompt fswatch_install_prompt
 		
 		if check_install; then
-			validate_brew=$(which brew 2>&1)
+			brew_status=$(which brew 2>&1)
 			
-			if [ "$validate_brew" = "brew not found" ]; then 
-				brew_install_prompt
-
-				while validate_installation
-				do
-					brew_install_prompt
-				done
+			if [ "$brew_status" = "brew not found" ]; then 
+				download_prompt brew_install_prompt
 
 				if check_install; then
 					brew_and_fswatch_install 
@@ -50,6 +40,14 @@ brew_install_prompt() {
 	echo "In order to download fswatch, you need brew."
 	echo "You do not have brew installed"
 	read -p "Would you like to install brew [y/n]? " install
+}
+
+download_prompt() {
+	$1
+	while validate_installation
+	do
+		$1
+	done
 }
 
 validate_installation() {
