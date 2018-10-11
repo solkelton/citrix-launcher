@@ -1,7 +1,8 @@
 Purpose.
 	This script is intended to automatically launch the Citrix Reciever when a launch.jsp file has been downloaded. 
 
-Installation Directions. 
+Installation Directions.
+
 		1. 
 			run citrix-launcher-launch.sh by typing ./citrix-launcher-launch.sh on the commandline,
 			while in the same directory as the download file
@@ -21,9 +22,11 @@ Requirements.
 			brew   
 
 Run Script.
+
 		./citrix-launcher-launch
 
 Notes.
+
 		1.
 			citrix-launcher is only capable of running while terminal is running
 		2.
