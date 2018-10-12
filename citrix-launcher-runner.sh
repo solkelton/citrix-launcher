@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#TODO: Determine launch state for Centrix Reciever, why errors are occuring on launch
 main () {
 	REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp"
 	file_added=$1

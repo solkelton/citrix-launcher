@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#TODO: Figure out why this doesn't work as expected on other computers (test on Alex)
 main() {
 	fswatch_status=$(which fswatch 2>&1)
 	if [ "$fswatch_status" = "fswatch not found" ]; then
