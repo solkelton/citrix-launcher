@@ -15,7 +15,6 @@ Requirements.
 
 		1.
 			citrix reciever
-	
 		2.
 			fswatch
 		3.
@@ -26,9 +25,6 @@ Run Script.
 		./citrix-launcher-launch
 
 Notes.
-
 		1.
-			citrix-launcher is only capable of running while terminal is running
-		2.
-			citrix-launcher is designed to work only with the default launch.jsp file and copies numbered 1-9
+			citrix-launcher is designed to work only with the default launch.jsp file and copies numbered 1-9, e.g., launch (3).jsp
 	
