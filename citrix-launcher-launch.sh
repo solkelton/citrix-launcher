@@ -12,7 +12,8 @@ main() {
 				download_prompt brew_install_prompt
 
 				if check_install; then
-					brew_and_fswatch_install 
+					brew_install
+					fswatch_install
 					deploy_citrix_launcher
 				else
 					echo "NOT INSTALLING BREW"
@@ -66,9 +67,8 @@ check_install() {
 	fi
 }
 
-brew_and_fswatch_install() {
+brew_install() {
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
-	brew install fswatch
 }
 
 fswatch_install() {
