@@ -1,7 +1,7 @@
 #!/bin/bash
 
 main() {
-	fswatch_status=$(type fswatch 2>&1)
+	fswatch_status=$(type fswatch)
 	echo "fswatch_status: $fswatch_status"
 	echo "I COME AFTER"
 	
