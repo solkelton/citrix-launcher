@@ -18,9 +18,7 @@ main () {
 		if [[ $launcher_name =~ $REGREX ]]; then
 			open $file_added -a "Citrix Receiver"
 		fi
-	
 	fi
-
 }
 
 main "$1"
