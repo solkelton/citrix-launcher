@@ -2,15 +2,23 @@
 
 #TODO: Figure out why this doesn't work as expected on other computers (test on Alex)
 main() {
+	FSWATCH="/usr/local/bin/fswatch"
+	BREW="/usr/local/bin/brew" 
 	fswatch_status=$(which fswatch 2>&1)
-	if [ "$fswatch_status" = "fswatch not found" ]; then
-		download_prompt fswatch_install_prompt
+	
+	if [ "$fswatch_status" = "$FSWATCH" ]; then
+		deploy_citrix_launcher
+	else 
+		install_logic fswatch_prompt 
 		
 		if check_install; then
 			brew_status=$(which brew 2>&1)
 			
-			if [ "$brew_status" = "brew not found" ]; then 
-				download_prompt brew_install_prompt
+			if [ "$brew_status" = "$BREW" ]; then 
+				fswatch_install
+				deploy_citrix_launcher
+			else
+				install_logic brew_prompt
 
 				if check_install; then
 					brew_install
@@ -19,32 +27,27 @@ main() {
 				else
 					echo "NOT INSTALLING BREW"
 					echo "Bye!"
-				fi
-			else 
-				fswatch_install
-				deploy_citrix_launcher  
+				fi	  
 			fi 
 		else
 			echo "NOT INSTALLING FSWATCH"
 			echo "Bye!"
 		fi 
-	else 
-		deploy_citrix_launcher
 	fi
 }
 
-fswatch_install_prompt() {
+fswatch_prompt() {
 	echo "You do not have fswatch installed."
 	read -p "Would you like to install fswatch [y/n]? " install 
 }
 
-brew_install_prompt() {
+brew_prompt() {
 	echo "In order to download fswatch, you need brew."
 	echo "You do not have brew installed"
 	read -p "Would you like to install brew [y/n]? " install
 }
 
-download_prompt() {
+install_logic() {
 	$1
 	while validate_installation
 	do
