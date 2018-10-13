@@ -1,7 +1,9 @@
 #!/bin/bash
 
 main() {
-	fswatch_status=$(which fswatch 2>&1)
+	fswatch_status=$(type fswatch 2>&1)
+	echo "fswatch_status: $fswatch_status"
+	
 	if [ "$fswatch_status" = "fswatch not found" ]; then
 		download_prompt fswatch_install_prompt
 		
