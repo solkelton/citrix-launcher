@@ -3,6 +3,7 @@
 main() {
 	fswatch_status=$(type fswatch 2>&1)
 	echo "fswatch_status: $fswatch_status"
+	echo "I COME AFTER"
 	
 	if [ "$fswatch_status" = "fswatch not found" ]; then
 		download_prompt fswatch_install_prompt
