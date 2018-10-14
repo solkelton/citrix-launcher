@@ -27,13 +27,11 @@ main() {
 					create_command_line_tool
 					deploy_citrix_launcher
 				else
-					echo "NOT INSTALLING BREW"
-					echo "Bye!"
+					exit_message "NOT INSTALLING BREW"
 				fi	  
 			fi 
 		else
-			echo "NOT INSTALLING FSWATCH"
-			echo "Bye!"
+			exit_message "NOT INSTALLING FSWATCH"
 		fi 
 	fi
 }
@@ -94,6 +92,11 @@ deploy_citrix_launcher() {
 	echo "Deploying citrix_launcher..."
 	nohup fswatch ~/downloads | xargs -n1 ./citrix-launcher-runner 2> /dev/null &
 	return 0 
+}
+
+exit_message() {
+	echo "$1"
+	echo "Bye!"
 }
 
 main
