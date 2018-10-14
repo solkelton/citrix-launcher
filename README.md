@@ -5,7 +5,7 @@ Purpose.
 Installation Directions.
 
 		1. 
-			run citrix-launcher-launch.sh by typing ./citrix-launcher-launch.sh on the commandline, while in the same directory as the download file
+			run citrix-launcher-launch.sh by typing ./citrix-launcher-launch.sh on the commandline, while in the same directory as this file
 		2. 
 			follow the prompts in order to download fswatch and brew 
 		3.
