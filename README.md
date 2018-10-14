@@ -21,8 +21,12 @@ Requirements.
 			brew   
 
 Run Script.
-
+	
+	Pre-Download
 		./citrix-launcher-launch.sh
+	
+	Post-Download
+		citrix-launcher-launch
 
 Notes.
 		
