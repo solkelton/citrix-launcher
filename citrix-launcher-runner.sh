@@ -1,25 +1,43 @@
 #!/bin/bash
 
-#TODO: Determine launch state for Centrix Reciever, why errors are occuring on launch
 main () {
-	REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp"
-	file_added=$1
-	launcher_name="${file_added##*/}"
+	REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp$"
+	DOWNLOADS="$HOME/Downloads/"
+	file_path=$1
+	file_name="${file_path##*/}"
 
-	if [ "$file_added" = "$launcher_name" ]; then
-		download_path="$HOME/Downloads/"
-		new_launcher_name="launch $launcher_name"
+	if [ "$file_path" = "$file_name" ]; then
+		new_file_name="launch $file_name"
 
-		if [[ $new_launcher_name =~ $REGREX ]]; then
-			new_file_added="$download_path$new_launcher_name"
-			open "$new_file_added" -a "Citrix Receiver"
+		if [[ $new_file_name =~ $REGREX ]]; then
+			new_file_path="$DOWNLOADS$new_file_name"
+			launch "$new_file_path"
 		fi
 	else
-		if [[ $launcher_name =~ $REGREX ]]; then
-			open $file_added -a "Citrix Receiver"
+		if [[ $file_name =~ $REGREX ]]; then
+			launch "$file_path"
 		fi
 	fi
 }
+
+launch() {
+	determine_state
+	if [ "$state" = "on" ]; then
+		killall "Citrix Receiver"
+	fi
+	open "$1" -a "Citrix Receiver"
+}
+
+
+determine_state() {
+	citrix_pid=$(ps aux | grep "/Applications/Citrix Receiver" | grep -v "grep" | awk '{print $2}')
+	if [ "$citrix_pid" = "" ]; then
+		state="off"
+	else
+		state="on"
+	fi
+} 
+
 
 main "$1"
 

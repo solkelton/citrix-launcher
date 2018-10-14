@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#TODO: Figure out why this doesn't work as expected on other computers (test on Alex)
 main() {
 	FSWATCH="/usr/local/bin/fswatch"
 	BREW="/usr/local/bin/brew" 
 	fswatch_status=$(which fswatch 2>&1)
 	
 	if [ "$fswatch_status" = "$FSWATCH" ]; then
+		create_command_line_tool
 		deploy_citrix_launcher
 	else 
 		install_logic fswatch_prompt 
@@ -16,6 +16,7 @@ main() {
 			
 			if [ "$brew_status" = "$BREW" ]; then 
 				fswatch_install
+				create_command_line_tool
 				deploy_citrix_launcher
 			else
 				install_logic brew_prompt
@@ -23,6 +24,7 @@ main() {
 				if check_install; then
 					brew_install
 					fswatch_install
+					create_command_line_tool
 					deploy_citrix_launcher
 				else
 					echo "NOT INSTALLING BREW"
@@ -66,7 +68,9 @@ validate_installation() {
 check_install() {
 	if [ "$install" = "y" ]; then
 		return 0;
-	else
+	fi
+
+	if ["$install" = "n" ]; then
 		return 1; 
 	fi
 }
@@ -77,6 +81,13 @@ brew_install() {
 
 fswatch_install() {
 	brew install fswatch
+}
+
+create_command_line_tool() {
+	cp ./citrix-launcher-launch.sh /usr/local/bin
+	cp ./citrix-launcher-runner.sh /usr/local/bin
+	mv /usr/local/bin/citrix-launcher-launch.sh /usr/local/bin/citrix-launcher-launch
+	mv /usr/local/bin/citrix-launcher-runner.sh /usr/local/bin/citrix-launcher-runner
 }
 
 deploy_citrix_launcher() {
