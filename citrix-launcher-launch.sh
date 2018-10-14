@@ -92,7 +92,7 @@ create_command_line_tool() {
 
 deploy_citrix_launcher() {
 	echo "Deploying citrix_launcher..."
-	nohup fswatch ~/downloads | xargs -n1 ./citrix-launcher-runner.sh 2> /dev/null &
+	nohup fswatch ~/downloads | xargs -n1 ./citrix-launcher-runner 2> /dev/null &
 	return 0 
 }
 
