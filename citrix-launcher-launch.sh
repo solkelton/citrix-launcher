@@ -100,4 +100,3 @@ exit_message() {
 }
 
 main
-
