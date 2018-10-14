@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#TODO: prevent multiple instances of launcher from running 
 main() {
 	FSWATCH="/usr/local/bin/fswatch"
 	BREW="/usr/local/bin/brew" 
@@ -90,8 +91,23 @@ create_command_line_tool() {
 
 deploy_citrix_launcher() {
 	echo "Deploying citrix_launcher..."
+
+	fswatch_pid=$(ps aux | grep "fswatch" | grep -v "grep" | awk '{print $2}')
+	xargs_pid=$(ps aux | grep "xargs" | grep -v "grep" | awk '{print $2}')
+	
+	if [ "$fswatch_pid" = "" ] && [ "$xargs_pid" = "" ]; then
+		launch_runner
+	else
+		kill -9 $fswatch_pid
+		kill -9 $xargs_pid
+		launch_runner 
+	fi
+	echo "Done!"
+	return 0
+}
+
+launch_runner() {
 	nohup fswatch ~/downloads | xargs -n1 ./citrix-launcher-runner 2> /dev/null &
-	return 0 
 }
 
 exit_message() {
