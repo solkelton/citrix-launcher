@@ -13,7 +13,7 @@ main () {
 			new_file_path="$DOWNLOADS$new_file_name"
 			launch "$new_file_path"
 		fi
-	else
+	else		
 		if [[ $file_name =~ $REGREX ]]; then
 			launch "$file_path"
 		fi
@@ -28,7 +28,6 @@ launch() {
 	open "$1" -a "Citrix Receiver"
 }
 
-
 determine_state() {
 	citrix_pid=$(ps aux | grep "/Applications/Citrix Receiver" | grep -v "grep" | awk '{print $2}')
 	if [ "$citrix_pid" = "" ]; then
@@ -37,7 +36,6 @@ determine_state() {
 		state="on"
 	fi
 } 
-
 
 main "$1"
 
