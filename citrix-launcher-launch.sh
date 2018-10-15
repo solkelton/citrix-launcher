@@ -101,7 +101,6 @@ deploy_citrix_launcher() {
 	if [ "$fswatch_pid" = "" ] && [ "$xargs_pid" = "" ]; then
 		launch_runner
 	else
-
 		remove_current_runner
 		launch_runner 
 	fi
