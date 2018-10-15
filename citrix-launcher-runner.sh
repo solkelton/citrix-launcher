@@ -26,7 +26,7 @@ main () {
 launch() {
 	determine_state
 	if [ "$state" = "on" ]; then
-		killall "$CITRIX"
+		close_citrix
 	fi
 	open "$1" -a "$CITRIX"
 }
@@ -40,7 +40,8 @@ determine_state() {
 	fi
 } 
 
+close_citrix() {
+	killall "$CITRIX"
+}
+
 main "$1"
-
-
-

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#TODO: prevent multiple instances of launcher from running 
 main() {
 	FSWATCH="/usr/local/bin/fswatch"
 	BREW="/usr/local/bin/brew" 
@@ -83,10 +82,14 @@ fswatch_install() {
 }
 
 create_command_line_tool() {
-	cp ./citrix-launcher-launch.sh /usr/local/bin
-	cp ./citrix-launcher-runner.sh /usr/local/bin
-	mv /usr/local/bin/citrix-launcher-launch.sh /usr/local/bin/citrix-launcher-launch
-	mv /usr/local/bin/citrix-launcher-runner.sh /usr/local/bin/citrix-launcher-runner
+	pwd=$(pwd)
+
+	if ! [ "$pwd" = "/usr/local/bin" ]; then
+		cp ./citrix-launcher-launch.sh /usr/local/bin
+		cp ./citrix-launcher-runner.sh /usr/local/bin
+		mv /usr/local/bin/citrix-launcher-launch.sh /usr/local/bin/citrix-launcher-launch
+		mv /usr/local/bin/citrix-launcher-runner.sh /usr/local/bin/citrix-launcher-runner
+	fi
 }
 
 deploy_citrix_launcher() {
@@ -98,16 +101,21 @@ deploy_citrix_launcher() {
 	if [ "$fswatch_pid" = "" ] && [ "$xargs_pid" = "" ]; then
 		launch_runner
 	else
-		kill -9 $fswatch_pid
-		kill -9 $xargs_pid
+
+		remove_current_runner
 		launch_runner 
 	fi
 	echo "Done!"
 	return 0
 }
 
+remove_current_runner() {
+	kill -9 $fswatch_pid
+	kill -9 $xargs_pid
+}
+
 launch_runner() {
-	nohup fswatch ~/downloads | xargs -n1 ./citrix-launcher-runner 2> /dev/null &
+	nohup fswatch ~/downloads | xargs -n1 citrix-launcher-runner 2> /dev/null &
 }
 
 exit_message() {
