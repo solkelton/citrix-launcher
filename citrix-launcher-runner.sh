@@ -2,32 +2,23 @@
 
 REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp$"
 DOWNLOADS="$HOME/Downloads/"
-CITRIX="Citrix Receiver"
+CITRIX="Citrix Workspace"
 CITRIX_PATH="/Applications/Citrix Receiver"
 
 main () {
 	file_path=$1
 	file_name="${file_path##*/}"
 
-	echo "file_path"
-	echo $file_path
-	
-	echo "file_name"
-	echo $file_name
-
 	if [ "$file_path" = "$file_name" ]; then
-		echo "file_path matches file_name"
 		new_file_name="launch $file_name"
 
 		if [[ $new_file_name =~ $REGREX ]]; then
-			echo "new_file_name matches REGREX"
 			new_file_path="$DOWNLOADS$new_file_name"
 			launch "$new_file_path"
 		fi
 	else		
 		echo "file_path does not match file_name"
 		if [[ $file_name =~ $REGREX ]]; then
-			echo "file_name matches REGREX"
 			launch "$file_path"
 		fi
 	fi
@@ -36,10 +27,8 @@ main () {
 launch() {
 	determine_state
 	if [ "$state" = "on" ]; then
-		echo "Citrix launcher: on"
 		close_citrix
 	fi
-	echo "Citrix launcher: off"
 	open "$1" -a "$CITRIX"
 }
 
