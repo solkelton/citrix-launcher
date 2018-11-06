@@ -2,7 +2,6 @@
 
 REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp$"
 DOWNLOADS="$HOME/Downloads/"
-CITRIX="Citrix Workspace" #add ability to detect citrix Workspace vs citrix Receiever
 CITRIX_PATH="/Applications/Citrix Receiver"
 
 main () {
@@ -25,6 +24,7 @@ main () {
 
 launch() {
 	determine_state
+	determine_app
 	if [ "$state" = "on" ]; then
 		close_citrix
 	fi
@@ -37,6 +37,15 @@ determine_state() {
 		state="off"
 	else
 		state="on"
+	fi
+}
+
+determine_app() {
+	app = $(ls /Applications | grep "Citrix Workspace")
+	if [ "$app" = "" ]; then
+		CITRIX="Citrix Receiver"
+	else
+		CITRIX="Citrix Workspace"
 	fi
 } 
 
