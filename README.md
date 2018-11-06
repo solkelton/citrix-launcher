@@ -1,6 +1,6 @@
 Purpose.
 
-	This script is intended to automatically launch the Citrix Reciever when a launch.jsp file has been downloaded. 
+	This script is intended to automatically launch the Citrix Reciever (or Workspace) when a launch.jsp file has been downloaded. 
 
 Installation Directions.
 
@@ -28,4 +28,4 @@ Notes.
 		
 		1.
 		
-			citrix-launcher is designed to work only with the default launch.jsp file and copies numbered 1-9, e.g., launch (3).jsp
+			citrix-launcher is designed to work only with the default launch.jsp file and copies numbered 1-999, e.g., launch (3).jsp, launch-45.jsp, etc.
