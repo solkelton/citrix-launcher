@@ -2,7 +2,7 @@
 
 REGREX="launch[[:space:]]?\(?([1-9]?)?\)?.jsp$"
 DOWNLOADS="$HOME/Downloads/"
-CITRIX="Citrix Workspace"
+CITRIX="Citrix Workspace" #add ability to detect citrix Workspace vs citrix Receiever
 CITRIX_PATH="/Applications/Citrix Receiver"
 
 main () {
@@ -17,7 +17,6 @@ main () {
 			launch "$new_file_path"
 		fi
 	else		
-		echo "file_path does not match file_name"
 		if [[ $file_name =~ $REGREX ]]; then
 			launch "$file_path"
 		fi
