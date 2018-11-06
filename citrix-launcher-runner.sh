@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REGREX="launch[[:space:]|-]?\(?([1-9]?)?\)?.jsp$" 
+REGREX="launch[[:space:]|-]?\(?([1-9]?[1-9]?[1-9]?)?\)?.jsp$" 
 DOWNLOADS="$HOME/Downloads/"
 CITRIX_PATH="/Applications/Citrix Receiver"
 
